@@ -1,0 +1,23 @@
+<ion-view view-title="Sepetim">
+
+    <ion-content ng-repeat="x in sepetim">
+        <h4>{{x.m_adi}} {{x.m_soyadi}} isimli musterinin sepeti</h4>
+        <button class="button button-small button-block button-royal" ng-click="s_yenile()">
+            sayfayi yenile
+        </button>
+        <ion-list>
+            
+            
+            <ion-item class="item-remove-animate  item-icon-right" ng-repeat="x in sepetim" type="item-text-wrap">
+
+                <h2>{{x.urunadi}}</h2>
+                <p>{{x.urunfiyat}} TL</p>
+
+            </ion-item>
+            
+        </ion-list>
+
+    </ion-content>
+    
+
+</ion-view>

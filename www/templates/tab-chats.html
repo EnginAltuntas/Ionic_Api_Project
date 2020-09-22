@@ -1,0 +1,31 @@
+<ion-view view-title="Urunler">
+        <ion-content>
+
+            <ion-list>
+                <button class="button button-small button-block button-royal" ng-click="sayfa_yenile()">
+                    sayfayi yenile
+                </button>
+                <ion-item class="item-remove-animate  item-icon-right" ng-repeat="x in urunler" type="item-text-wrap"> 
+
+                    <h2>{{x.urun_isim}}</h2>
+                    <p>{{x.urun_fiyat}} TL</p>
+                    
+
+                    <button class="button button-small button-energized" ng-click="urunu_sil(x.uId)">
+                        urunu sil
+                    </button>
+
+                    <button class="button button-small button-balanced" ng-click="urunu_guncelle(x.uId)">
+                        urunu guncelle
+                    </button>
+
+                    
+                    <!--<a href="#/tab/guncelle" class="button button-small button-balanced">urunu guncelle</a>-->
+                    
+                    
+                </ion-item>
+               
+            </ion-list>
+        </ion-content>
+
+</ion-view>

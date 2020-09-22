@@ -1,0 +1,19 @@
+<ion-view view-title="Urun kayit">
+  <ion-content>
+      <div class="list">
+          <label class="item item-input">
+              <span class="input-label" >Urun ismi</span>
+              <input type="text" ng-model="u_isim">
+          </label>
+          <label class="item item-input">
+              <span class="input-label">Urun fiyati</span>
+              <input type="text" ng-model="u_fiyat">
+          </label>
+      </div>
+      <ion-list>
+          <button class="button button-block button-positive " ng-click="urunu_kaydet(u_isim,u_fiyat)">
+              KAYDET
+          </button>
+      </ion-list>
+  </ion-content>
+</ion-view>

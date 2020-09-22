@@ -1,0 +1,24 @@
+<ion-view view-title="Musteri Urunler">
+
+    <ion-content>
+        <ion-list>
+
+            <ion-item class="item-remove-animate  item-icon-right" ng-repeat="x in urunler" type="item-text-wrap">
+
+                <h2>{{x.urun_isim}}</h2>
+                <p>{{x.urun_fiyat}} TL</p>
+
+                <button class="button button-small button-energized" ng-click="sepetekle(x.uId)">
+                    sepete ekle
+                </button>
+             
+            </ion-item>
+
+        </ion-list>
+        <button class="button button-small button-balanced button-block" ng-click="sepeti_listele()">
+            Sepetim
+        </button>
+    </ion-content>
+    
+
+</ion-view>
