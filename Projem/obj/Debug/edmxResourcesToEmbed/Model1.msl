@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="mobil_projeModelStoreContainer" CdmEntityContainer="mobil_projeEntities1">
+    <EntitySetMapping Name="Kullanicilar">
+      <EntityTypeMapping TypeName="mobil_projeModel.Kullanicilar">
+        <MappingFragment StoreEntitySet="Kullanicilar">
+          <ScalarProperty Name="kId" ColumnName="kId" />
+          <ScalarProperty Name="kullanici_adi" ColumnName="kullanici_adi" />
+          <ScalarProperty Name="sifre" ColumnName="sifre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Müşteri">
+      <EntityTypeMapping TypeName="mobil_projeModel.Müşteri">
+        <MappingFragment StoreEntitySet="Müşteri">
+          <ScalarProperty Name="mId" ColumnName="mId" />
+          <ScalarProperty Name="kId" ColumnName="kId" />
+          <ScalarProperty Name="adi" ColumnName="adi" />
+          <ScalarProperty Name="soyadi" ColumnName="soyadi" />
+          <ScalarProperty Name="yas" ColumnName="yas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sepet">
+      <EntityTypeMapping TypeName="mobil_projeModel.Sepet">
+        <MappingFragment StoreEntitySet="Sepet">
+          <ScalarProperty Name="sId" ColumnName="sId" />
+          <ScalarProperty Name="uId" ColumnName="uId" />
+          <ScalarProperty Name="mId" ColumnName="mId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="mobil_projeModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ürünler">
+      <EntityTypeMapping TypeName="mobil_projeModel.Ürünler">
+        <MappingFragment StoreEntitySet="Ürünler">
+          <ScalarProperty Name="uId" ColumnName="uId" />
+          <ScalarProperty Name="urun_isim" ColumnName="urun_isim" />
+          <ScalarProperty Name="urun_fiyat" ColumnName="urun_fiyat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Yönetici">
+      <EntityTypeMapping TypeName="mobil_projeModel.Yönetici">
+        <MappingFragment StoreEntitySet="Yönetici">
+          <ScalarProperty Name="yId" ColumnName="yId" />
+          <ScalarProperty Name="kId" ColumnName="kId" />
+          <ScalarProperty Name="adi" ColumnName="adi" />
+          <ScalarProperty Name="soyadi" ColumnName="soyadi" />
+          <ScalarProperty Name="yas" ColumnName="yas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

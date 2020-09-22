@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="mobil_projeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Kullanicilar">
+    <Key>
+      <PropertyRef Name="kId" />
+    </Key>
+    <Property Name="kId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kullanici_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sifre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Müşteri" Relationship="Self.FK_Müşteri_Kullanicilar" FromRole="Kullanicilar" ToRole="Müşteri" />
+    <NavigationProperty Name="Yönetici" Relationship="Self.FK_Yönetici_Kullanicilar" FromRole="Kullanicilar" ToRole="Yönetici" />
+  </EntityType>
+  <EntityType Name="Müşteri">
+    <Key>
+      <PropertyRef Name="mId" />
+    </Key>
+    <Property Name="mId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kId" Type="Int32" Nullable="false" />
+    <Property Name="adi" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="soyadi" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="yas" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Kullanicilar" Relationship="Self.FK_Müşteri_Kullanicilar" FromRole="Müşteri" ToRole="Kullanicilar" />
+    <NavigationProperty Name="Sepet" Relationship="Self.FK_Sepet_Müşteri" FromRole="Müşteri" ToRole="Sepet" />
+  </EntityType>
+  <EntityType Name="Sepet">
+    <Key>
+      <PropertyRef Name="sId" />
+    </Key>
+    <Property Name="sId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uId" Type="Int32" Nullable="false" />
+    <Property Name="mId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Müşteri" Relationship="Self.FK_Sepet_Müşteri" FromRole="Sepet" ToRole="Müşteri" />
+    <NavigationProperty Name="Ürünler" Relationship="Self.FK_Sepet_Ürünler" FromRole="Sepet" ToRole="Ürünler" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Ürünler">
+    <Key>
+      <PropertyRef Name="uId" />
+    </Key>
+    <Property Name="uId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="urun_isim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="urun_fiyat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Sepet" Relationship="Self.FK_Sepet_Ürünler" FromRole="Ürünler" ToRole="Sepet" />
+  </EntityType>
+  <EntityType Name="Yönetici">
+    <Key>
+      <PropertyRef Name="yId" />
+    </Key>
+    <Property Name="yId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kId" Type="Int32" Nullable="false" />
+    <Property Name="adi" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="soyadi" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="yas" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Kullanicilar" Relationship="Self.FK_Yönetici_Kullanicilar" FromRole="Yönetici" ToRole="Kullanicilar" />
+  </EntityType>
+  <Association Name="FK_Müşteri_Kullanicilar">
+    <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="1" />
+    <End Role="Müşteri" Type="Self.Müşteri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanicilar">
+        <PropertyRef Name="kId" />
+      </Principal>
+      <Dependent Role="Müşteri">
+        <PropertyRef Name="kId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Yönetici_Kullanicilar">
+    <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="1" />
+    <End Role="Yönetici" Type="Self.Yönetici" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanicilar">
+        <PropertyRef Name="kId" />
+      </Principal>
+      <Dependent Role="Yönetici">
+        <PropertyRef Name="kId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sepet_Müşteri">
+    <End Role="Müşteri" Type="Self.Müşteri" Multiplicity="1" />
+    <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Müşteri">
+        <PropertyRef Name="mId" />
+      </Principal>
+      <Dependent Role="Sepet">
+        <PropertyRef Name="mId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sepet_Ürünler">
+    <End Role="Ürünler" Type="Self.Ürünler" Multiplicity="1" />
+    <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ürünler">
+        <PropertyRef Name="uId" />
+      </Principal>
+      <Dependent Role="Sepet">
+        <PropertyRef Name="uId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="mobil_projeEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Kullanicilar" EntityType="Self.Kullanicilar" />
+    <EntitySet Name="Müşteri" EntityType="Self.Müşteri" />
+    <EntitySet Name="Sepet" EntityType="Self.Sepet" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Ürünler" EntityType="Self.Ürünler" />
+    <EntitySet Name="Yönetici" EntityType="Self.Yönetici" />
+    <AssociationSet Name="FK_Müşteri_Kullanicilar" Association="Self.FK_Müşteri_Kullanicilar">
+      <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+      <End Role="Müşteri" EntitySet="Müşteri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Yönetici_Kullanicilar" Association="Self.FK_Yönetici_Kullanicilar">
+      <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+      <End Role="Yönetici" EntitySet="Yönetici" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sepet_Müşteri" Association="Self.FK_Sepet_Müşteri">
+      <End Role="Müşteri" EntitySet="Müşteri" />
+      <End Role="Sepet" EntitySet="Sepet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sepet_Ürünler" Association="Self.FK_Sepet_Ürünler">
+      <End Role="Ürünler" EntitySet="Ürünler" />
+      <End Role="Sepet" EntitySet="Sepet" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

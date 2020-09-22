@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="mobil_projeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Kullanicilar">
+    <Key>
+      <PropertyRef Name="kId" />
+    </Key>
+    <Property Name="kId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kullanici_adi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sifre" Type="nchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Müşteri">
+    <Key>
+      <PropertyRef Name="mId" />
+    </Key>
+    <Property Name="mId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kId" Type="int" Nullable="false" />
+    <Property Name="adi" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="soyadi" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="yas" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Sepet">
+    <Key>
+      <PropertyRef Name="sId" />
+    </Key>
+    <Property Name="sId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uId" Type="int" Nullable="false" />
+    <Property Name="mId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Ürünler">
+    <Key>
+      <PropertyRef Name="uId" />
+    </Key>
+    <Property Name="uId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="urun_isim" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="urun_fiyat" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Yönetici">
+    <Key>
+      <PropertyRef Name="yId" />
+    </Key>
+    <Property Name="yId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kId" Type="int" Nullable="false" />
+    <Property Name="adi" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="soyadi" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="yas" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_Müşteri_Kullanicilar">
+    <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="1" />
+    <End Role="Müşteri" Type="Self.Müşteri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanicilar">
+        <PropertyRef Name="kId" />
+      </Principal>
+      <Dependent Role="Müşteri">
+        <PropertyRef Name="kId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sepet_Müşteri">
+    <End Role="Müşteri" Type="Self.Müşteri" Multiplicity="1" />
+    <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Müşteri">
+        <PropertyRef Name="mId" />
+      </Principal>
+      <Dependent Role="Sepet">
+        <PropertyRef Name="mId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sepet_Ürünler">
+    <End Role="Ürünler" Type="Self.Ürünler" Multiplicity="1" />
+    <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ürünler">
+        <PropertyRef Name="uId" />
+      </Principal>
+      <Dependent Role="Sepet">
+        <PropertyRef Name="uId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Yönetici_Kullanicilar">
+    <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="1" />
+    <End Role="Yönetici" Type="Self.Yönetici" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanicilar">
+        <PropertyRef Name="kId" />
+      </Principal>
+      <Dependent Role="Yönetici">
+        <PropertyRef Name="kId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="mobil_projeModelStoreContainer">
+    <EntitySet Name="Kullanicilar" EntityType="Self.Kullanicilar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Müşteri" EntityType="Self.Müşteri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sepet" EntityType="Self.Sepet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ürünler" EntityType="Self.Ürünler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Yönetici" EntityType="Self.Yönetici" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Müşteri_Kullanicilar" Association="Self.FK_Müşteri_Kullanicilar">
+      <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+      <End Role="Müşteri" EntitySet="Müşteri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sepet_Müşteri" Association="Self.FK_Sepet_Müşteri">
+      <End Role="Müşteri" EntitySet="Müşteri" />
+      <End Role="Sepet" EntitySet="Sepet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sepet_Ürünler" Association="Self.FK_Sepet_Ürünler">
+      <End Role="Ürünler" EntitySet="Ürünler" />
+      <End Role="Sepet" EntitySet="Sepet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Yönetici_Kullanicilar" Association="Self.FK_Yönetici_Kullanicilar">
+      <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+      <End Role="Yönetici" EntitySet="Yönetici" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
